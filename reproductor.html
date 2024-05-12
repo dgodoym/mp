@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>iRaffle TV | Televisión Gratis por Internet</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="iRaffle TV - Eventos deportivos y canales de televisión en vivo completamente gratis">
+    <meta name="keywords"
+        content="Canales de TV gratis, ver tele gratis, television gratis, partidos gratis, iRaffle TV.">
+    <meta name="author" content="iRaffle TV">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1">
+    <link rel="shortcut icon" href="assets/favicon.png">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L0M9BFKRR9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-L0M9BFKRR9');
+    </script>
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css" />
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor/toastify/toastify.min.css">
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.css">
+
+    <!-- Events Styles -->
+    <link rel="stylesheet" media="screen" href="assets/css/events.css">
+    <link rel="stylesheet" media="screen" href="assets/css/flags.css">
+
+    <!-- Page loading styles -->
+    <style>
+        .page-loading {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            -webkit-transition: all .4s .2s ease-in-out;
+            transition: all .4s .2s ease-in-out;
+            background-color: #fff;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 9999;
+        }
+
+        .dark-mode .page-loading {
+            background-color: #0b0f19;
+        }
+
+        .page-loading.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar:horizontal {
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #6366f1;
+            border-radius: 6px;
+        }
+
+        .page-loading-inner {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+            -webkit-transition: opacity .2s ease-in-out;
+            transition: opacity .2s ease-in-out;
+            opacity: 0;
+        }
+
+        .page-loading.active>.page-loading-inner {
+            opacity: 1;
+        }
+
+        .page-loading-inner>span {
+            display: block;
+            font-size: 1rem;
+            font-weight: normal;
+            color: #9397ad;
+        }
+
+        .dark-mode .page-loading-inner>span {
+            color: #fff;
+            opacity: .6;
+        }
+
+        .page-spinner {
+            display: inline-block;
+            width: 2.75rem;
+            height: 2.75rem;
+            margin-bottom: .75rem;
+            vertical-align: text-bottom;
+            border: .15em solid #b4b7c9;
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner .75s linear infinite;
+            animation: spinner .75s linear infinite;
+        }
+
+        .dark-mode .page-spinner {
+            border-color: rgba(255, 255, 255, .4);
+            border-right-color: transparent;
+        }
+
+        @-webkit-keyframes spinner {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spinner {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+
+    <!-- Theme mode -->
+    <script>
+        let mode = window.localStorage.getItem('mode'),
+            root = document.getElementsByTagName('html')[0];
+        if (mode !== null && mode === 'dark') {
+            root.classList.add('dark-mode');
+        } else {
+            root.classList.remove('dark-mode');
+        }
+    </script>
+
+    <!-- Page loading scripts -->
+    <script>
+        (function () {
+            window.onload = function () {
+                const preloader = document.querySelector('.page-loading');
+                preloader.classList.remove('active');
+                setTimeout(function () {
+                    preloader.remove();
+                }, 1000);
+            };
+        })();
+    </script>
+</head>
+
+
+<!-- Body -->
+
+<body>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+        <div class="page-loading-inner">
+            <div class="page-spinner"></div><span>Cargando...</span>
+        </div>
+    </div>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+
+        <!-- Navbar -->
+        <header class="header navbar navbar-expand-lg bg-light navbar-sticky">
+            <div class="container px-3">
+                <a href="?p=home" class="navbar-brand pe-3">
+                    <div id="logo" alt="iRaffle TV"></div>
+                    iRaffle TV
+                </a>
+                <div id="navbarNav" class="offcanvas offcanvas-end">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a href="?p=eventos&tipo=football" class="nav-link
+                                ">Fútbol</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="?p=motor" class="nav-link
+                                ">Motor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="?p=tv" class="nav-link
+                                active">TV</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="?p=radio" class="nav-link
+                                ">Radio</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle
+                                                                " data-bs-toggle="dropdown"
+                                    aria-current="page">Exclusivos</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="?p=star" class="dropdown-item
+                                    ">Star+</a></li>
+                                    <li><a href="?p=vix" class="dropdown-item
+                                    ">Vix+</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
+                    <input type="checkbox" class="form-check-input" id="theme-mode">
+                    <label class="form-check-label d-none d-sm-block" for="theme-mode"><i
+                            class="bx bx-sun fs-5 lh-1 me-1"></i></label>
+                    <label class="form-check-label d-none d-sm-block" for="theme-mode"><i
+                            class="bx bx-moon fs-5 lh-1 me-1"></i></label>
+                </div>
+                <a href="?p=login" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" rel="noopener">
+                    <i class="bx bx-user fs-5 lh-1 me-1"></i>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </header>
+        <div id="notificacion"></div>
+        <div id="toast-container" class="position-fixed bottom-0 end-0 p-3">
+        </div>
+
+        <section class="container mb-5 pt-4 pb-2 py-mg-4">
+            <div class="row gy-4">
+
+                <!-- Content -->
+                <div id="playerCol" class="col-lg-9">
+                    <div class="row">
+                        <div class="col-9">
+                            <h2 class="h4"> Ver
+                                DAZN En Vivo
+                            </h2>
+                        </div>
+                        <div class="col-3">
+                            <!-- Toggle Size Player -->
+                            <div class="d-flex justify-content-end">
+                                <div id="mode-switch" class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4">
+                                    <input type="checkbox" class="form-check-input" id="expandirBtn"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar modo teatro">
+                                    <label class="form-check-label d-none d-sm-block" for="expandirBtn">Normal</label>
+                                    <label class="form-check-label d-none d-sm-block" for="expandirBtn">Teatro</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Reproductor -->
+                    <div class="gallery mb-4 pb-2">
+                        <a id="playerFake" style="display: none"
+                            href="https://www.highcpmrevenuegate.com/mkd1fhhe?key=81193c57b7f58377107604b71a3e49aa"
+                            target="_blank">
+                            <img class="img-fluid" src="assets/img/player_img.png" alt="">
+                        </a>
+                        <div class="embed-responsive embed-responsive-16by9" id="playerContainer">
+                            <iframe id='embed-player' class='embed-responsive-item' width='100%' height='100%'
+                                frameborder='0' scrolling='no' allowfullscreen allow-encrypted-media
+                                src='https://www.youtube.com/embed/dnZoC4aKC2Q?si=Xlt2selSnLOBITdJ'></iframe>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="col-6">
+                                <div class="d-flex justify-content-start">
+                                    <!-- Dropend -->
+                                    <div class="btn-group dropup">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bx bx-loader-circle fs-5 lh-1 me-1"></i>
+                                            Fuente
+                                        </button>
+                                        <div class="dropdown-menu mx-1">
+                                            <a href="javascript:void(0)" class="dropdown-item">
+                                                Fuentes:
+                                                DAZN </a>
+                                            <hr class="dropdown-divider">
+                                            <a href="?p=tv&c=1&f=1" class="dropdown-item active">
+                                                <i class="flag spain"></i>
+                                                DAZN 1 ES </a>
+                                            <a href="?p=tv&c=1&f=2" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN 1 ES </a>
+                                            <a href="?p=tv&c=1&f=3" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN 2 ES </a>
+                                            <a href="?p=tv&c=1&f=4" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN 2 ES </a>
+                                            <a href="?p=tv&c=1&f=5" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN 3 ES </a>
+                                            <a href="?p=tv&c=1&f=6" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN 4 ES </a>
+                                            <a href="?p=tv&c=1&f=7" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN F1 </a>
+                                            <a href="?p=tv&c=1&f=8" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN F1 </a>
+                                            <a href="?p=tv&c=1&f=9" class="dropdown-item ">
+                                                <i class="flag germany"></i>
+                                                DAZN 1 DE </a>
+                                            <a href="?p=tv&c=1&f=10" class="dropdown-item ">
+                                                <i class="flag germany"></i>
+                                                DAZN 2 DE </a>
+                                            <a href="?p=tv&c=1&f=11" class="dropdown-item ">
+                                                <i class="flag us"></i>
+                                                NBA TV </a>
+                                            <a href="?p=tv&c=1&f=12" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN LaLiga </a>
+                                            <a href="?p=tv&c=1&f=13" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                DAZN LaLiga </a>
+                                            <a href="?p=tv&c=1&f=14" class="dropdown-item ">
+                                                <i class="flag germany"></i>
+                                                Fussball </a>
+                                            <a href="?p=tv&c=1&f=15" class="dropdown-item ">
+                                                <i class="flag us"></i>
+                                                NFL Network </a>
+                                            <a href="?p=tv&c=1&f=16" class="dropdown-item ">
+                                                <i class="flag italy"></i>
+                                                Zona DAZN </a>
+                                            <a href="?p=tv&c=1&f=17" class="dropdown-item ">
+                                                <i class="flag italy"></i>
+                                                AC Milan TV </a>
+                                            <a href="?p=tv&c=1&f=18" class="dropdown-item ">
+                                                <i class="flag us"></i>
+                                                MLB Network </a>
+                                            <a href="?p=tv&c=1&f=19" class="dropdown-item ">
+                                                <i class="flag england"></i>
+                                                Premier League </a>
+                                            <a href="?p=tv&c=1&f=20" class="dropdown-item ">
+                                                <i class="flag england"></i>
+                                                LaLiga TV </a>
+                                            <a href="?p=tv&c=1&f=21" class="dropdown-item ">
+                                                <i class="flag spain"></i>
+                                                LaLiga Plus </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <script src="inc/ads/related-ad.php"></script>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Votos -->
+                <div id="chatCol" class="col-lg-3 position-relative">
+                    <div class="sticky-top " style="top: 105px !important;">
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <button data-canal-id="1" type="button"
+                                    class="disabled btn btn-sm btn-outline-success like-btn ">
+                                    <i class="bx bx-like me-2 lead"></i>
+                                    <span id="like-count-1" class="badge bg-primary shadow-primary mt-n1 ms-3">
+                                        0 </span>
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button data-canal-id="1" type="button"
+                                    class="disabled btn btn-sm btn-outline-danger dislike-btn ">
+                                    <i class="bx bx-dislike me-2 lead"></i>
+                                    <span id="dislike-count-1" class="badge bg-danger shadow-primary mt-n1 ms-3">
+                                        1 </span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- AJAX -->
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                        <script src="inc/componentes/like.js"></script>
+                        <br>
+                        <!-- Chat & Post -->
+                        <!-- Chat -->
+                        <div class="rounded-3">
+                            <iframe id="twitch-chat-embed" class="rounded-3" src height="560" width="100%"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <script src="assets/js/playconfig3.js"></script>
+            </div>
+            </div>
+        </section>
+        <!-- Relacionados -->
+        <section class="container mb-5 pt-md-4">
+            <div class="d-flex flex-sm-row flex-column align-items-center justify-content-between mb-4 pb-1 pb-md-3">
+                <h2 class="h1 mb-sm-0">Canales Relacionados</h2>
+                <a href="?p=tv" class="btn btn-lg btn-outline-primary ms-4">
+                    Ver Todo
+                    <i class="bx bx-right-arrow-alt ms-1 me-n1 lh-1 lead"></i>
+                </a>
+            </div>
+
+            <!-- Carousel -->
+            <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden"
+                data-swiper-options="{
+          &quot;slidesPerView&quot;: 1,
+          &quot;spaceBetween&quot;: 24,
+          &quot;pagination&quot;: {
+            &quot;el&quot;: &quot;.swiper-pagination&quot;,
+            &quot;clickable&quot;: true
+          },
+          &quot;breakpoints&quot;: {
+            &quot;500&quot;: {
+              &quot;slidesPerView&quot;: 2
+            },
+            &quot;768&quot;: {
+              &quot;slidesPerView&quot;: 3
+            },
+            &quot;1000&quot;: {
+              &quot;slidesPerView&quot;: 3
+            },
+            &quot;1200&quot;: {
+              &quot;slidesPerView&quot;: 4
+            }
+          }
+        }">
+                <div class="swiper-wrapper" id="swiper-wrapper-4799ce1078136239e" aria-live="polite"
+                    style="transform: translate3d(0px, 0px, 0px);">
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=330&f=317"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/directv.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=330&f=317">
+                                    DSports </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=330&f=317" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=317&f=302"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/foxsports.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=317&f=302">
+                                    Fox Sports Premium </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=317&f=302" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=26&f=99"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/skysports.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=26&f=99">
+                                    Sky 259 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=26&f=99" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=7&f=46"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/ziggo.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=7&f=46">
+                                    Ziggo Sport Voetbal </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=7&f=46" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=1&f=9"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/dazn.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=1&f=9">
+                                    DAZN 1 DE </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=1&f=9" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=26&f=93"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/skysports.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=26&f=93">
+                                    Sky 253 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=26&f=93" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=361&f=367"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/premiere.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=361&f=367">
+                                    Premiere Sport 3 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=361&f=367" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=39&f=131"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/tntsports.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=39&f=131">
+                                    TNT Sports 2 GB </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=39&f=131" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=5&f=35"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/bein.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=5&f=35">
+                                    Hypermotion 2 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=5&f=35" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=66&f=153"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/sporttv.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=66&f=153">
+                                    Sport TV 5 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=66&f=153" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=305&f=251"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/tycsports.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=305&f=251">
+                                    TyC Sports Play 2 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=305&f=251" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=26&f=80"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/skysports.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=26&f=80">
+                                    Sky Sports Calcio IT </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=26&f=80" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=7&f=48"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/ziggo.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=7&f=48">
+                                    Ziggo Sport </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=7&f=48" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=25&f=77"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/eleven.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=25&f=77">
+                                    Eleven Sport 3 PL </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=25&f=77" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=316&f=295"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/foxsports.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=316&f=295">
+                                    Fox Sports 3 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=316&f=295" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=307&f=270"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/espn.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=307&f=270">
+                                    ESPN 2 </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=307&f=270" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=5&f=32"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/bein.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=5&f=32">
+                                    Hypermotion </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=5&f=32" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                    <!-- Item -->
+                    <div class="swiper-slide h-auto pb-3 swiper-slide-active"
+                        style="width: 329.5px; margin-right: 24px;" role="group" aria-label="1 / 4">
+                        <article>
+                            <div class="d-block position-relative rounded-3 mb-3">
+                                <span class="badge bg-dark position-absolute bottom-0 end-0 zindex-2 mb-3 me-3">
+                                    Deportes </span>
+                                <a href="?p=tv&c=1&f=6"
+                                    class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-35 rounded-3"
+                                    aria-label="Listen podcast"></a>
+                                <img style="height: 50px!important" src="assets/img/canales/dazn.png"
+                                    class="card-img-canal" alt="Image">
+                                <br><br><br><br>
+                            </div>
+                            <h3 class="h5">
+                                <a href="?p=tv&c=1&f=6">
+                                    DAZN 4 ES </a>
+                            </h3>
+                            <div class="d-flex align-items-center text-muted">
+                            </div>
+                            <a href="?p=tv&c=1&f=6" class="btn btn-link px-0 mt-3">
+                                <i class="bx bx-play-circle fs-lg me-2"></i>
+                                Ver ahora
+                            </a>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Pagination (bullets) -->
+                <div
+                    class="swiper-pagination position-relative pt-2 pt-sm-3 mt-4 swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
+                        aria-label="Go to slide 1" aria-current="true"></span><span class="swiper-pagination-bullet"
+                        tabindex="0" role="button" aria-label="Go to slide 2"></span><span
+                        class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span>
+                </div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="footer dark-mode bg-dark pt-5 pb-4 pb-lg-5">
+            <div class="container pt-lg-4">
+                <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
+                    <span class="text-light opacity-50">&copy; Todos los Derechos Reservados. Creado por </span>
+                    <a class="nav-link d-inline-block p-0" href="https://irtvhn.info/" target="_blank"
+                        rel="noopener">iRaffle TV</a>
+                </p>
+            </div>
+        </footer>
+
+
+        <!-- Back to top button -->
+        <a href="#top" class="btn-scroll-top" data-scroll>
+            <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Subir</span>
+            <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+        </a>
+
+
+        <!-- Vendor Scripts -->
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+        <script src="assets/vendor/@lottiefiles/lottie-player/dist/lottie-player.js"></script>
+        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="assets/vendor/console-ban/console-ban.min.js"></script>
+        <script src="assets/vendor/toastify/toastify.min.js"></script>
+
+        <!-- Main Theme Script -->
+        <script src="assets/js/theme.min.js"></script>
+
+        <!-- Filtro de tarjetas -->
+        <script src="assets/js/filter.js"></script>
+</body>
+
+</html>
